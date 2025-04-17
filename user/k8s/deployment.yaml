@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+  namespace: app1
+  labels:
+    app: app1
+spec:
+  # ReplicaSet
+  replicas: 4 # сколько экземляров приложения развернуть
+  selector: # какие поды нужно поддерживать
+    matchLabels:
+      app: app1
+  template: # для подов (Pod)
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+        - name: app1-container
+          image: docker.io/library/app1:latest
+          imagePullPolicy: "Never" # for local in minikube
+          ports:
+            - containerPort: 8080
+  strategy: # Стратегия
+    type: RollingUpdate # либо Recrate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
