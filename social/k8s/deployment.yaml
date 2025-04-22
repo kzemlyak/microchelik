@@ -1,29 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app1
-  namespace: app1
+  name: social-service
+  namespace: social-service
   labels:
-    app: app1
+    app: social-service
 spec:
-  # ReplicaSet
-  replicas: 4 # сколько экземляров приложения развернуть
-  selector: # какие поды нужно поддерживать
+  replicas: 4
+  selector:
     matchLabels:
-      app: app1
-  template: # для подов (Pod)
+      app: social-service
+  template:
     metadata:
       labels:
-        app: app1
+        app: social-service
     spec:
       containers:
-        - name: app1-container
-          image: docker.io/library/app1:latest
+        - name: social-service-container
+          image: docker.io/library/social-service:latest
           imagePullPolicy: "Never" # for local in minikube
           ports:
             - containerPort: 8080
-  strategy: # Стратегия
-    type: RollingUpdate # либо Recrate
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+  strategy:
+    type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
