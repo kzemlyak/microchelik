@@ -1,19 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chat-service
+  name: chat-service-green
   namespace: chat-service
   labels:
     app: chat-service
+    version: green
 spec:
   replicas: 4
   selector:
     matchLabels:
       app: chat-service
+      version: green
   template:
     metadata:
       labels:
         app: chat-service
+        version: green
     spec:
       containers:
         - name: chat-service-container
@@ -42,4 +45,4 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 1
+      maxUnavailable: 1 

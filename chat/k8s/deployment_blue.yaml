@@ -1,23 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway-service
-  namespace: gateway-service
+  name: chat-service-blue
+  namespace: chat-service
   labels:
-    app: gateway-service
+    app: chat-service
+    version: blue
 spec:
   replicas: 4
-  selector: # какие поды нужно поддерживать
+  selector:
     matchLabels:
-      app: gateway-service
+      app: chat-service
+      version: blue
   template:
     metadata:
       labels:
-        app: gateway-service
+        app: chat-service
+        version: blue
     spec:
       containers:
-        - name: gateway-service-container
-          image: docker.io/library/gateway-service:latest
+        - name: chat-service-container
+          image: docker.io/library/chat-service:latest
           imagePullPolicy: "Never" # for local in minikube
           ports:
             - containerPort: 8080
@@ -42,4 +45,4 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      maxUnavailable: 1
+      maxUnavailable: 1 

@@ -1,23 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
-  namespace: user-service
+  name: gateway-service-blue
+  namespace: gateway-service
   labels:
-    app: user-service
+    app: gateway-service
+    version: blue
 spec:
   replicas: 4
-  selector: # какие поды нужно поддерживать
+  selector:
     matchLabels:
-      app: user-service
-  template: # для подов (Pod)
+      app: gateway-service
+      version: blue
+  template:
     metadata:
       labels:
-        app: user-service
+        app: gateway-service
+        version: blue
     spec:
       containers:
-        - name: user-service-container
-          image: docker.io/library/user-service:latest
+        - name: gateway-service-container
+          image: docker.io/library/gateway-service:latest
           imagePullPolicy: "Never" # for local in minikube
           ports:
             - containerPort: 8080
