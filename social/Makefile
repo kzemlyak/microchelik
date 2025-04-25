@@ -10,7 +10,30 @@ apply-k8s:
 	kubectl apply -f k8s/service.yaml
 
 switch-to-blue:
+	kubectl scale deployment social-service-blue --replicas=10
+	kubectl scale deployment social-service-green --replicas=10
 	kubectl patch service social-service -p '{"spec":{"selector":{"version":"blue"}}}'
 
 switch-to-green:
-	kubectl patch service social-service -p '{"spec":{"selector":{"version":"green"}}}' 
+	kubectl scale deployment social-service-blue --replicas=10
+	kubectl scale deployment social-service-green --replicas=10
+	kubectl patch service social-service -p '{"spec":{"selector":{"version":"green"}}}'
+
+delete-service-version:
+	kubectl patch service social-service -p '{"spec":{"selector":{"version":null}}}'
+
+canary-20: delete-service-version
+	kubectl scale deployment social-service-blue --replicas=8
+	kubectl scale deployment social-service-green --replicas=2
+
+canary-50: delete-service-version
+	kubectl scale deployment social-service-blue --replicas=5
+	kubectl scale deployment social-service-green --replicas=5
+
+canary-80: delete-service-version
+	kubectl scale deployment social-service-blue --replicas=2
+	kubectl scale deployment social-service-green --replicas=8
+
+canary-100: delete-service-version
+	kubectl scale deployment social-service-blue --replicas=0
+	kubectl scale deployment social-service-green --replicas=10

@@ -7,7 +7,7 @@ metadata:
     app: social-service
     version: green
 spec:
-  replicas: 4
+  replicas: 10
   selector:
     matchLabels:
       app: social-service
