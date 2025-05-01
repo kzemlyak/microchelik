@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service-green
+  namespace: chat-service
+  labels:
+    app: chat-service
+    version: green
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: chat-service
+      version: green
+  template:
+    metadata:
+      labels:
+        app: chat-service
+        version: green
+    spec:
+      containers:
+        - name: chat-service-container
+          image: docker.io/library/chat-service:latest
+          imagePullPolicy: "Never" # for local in minikube
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1 
