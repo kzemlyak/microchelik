@@ -22,6 +22,10 @@ switch-to-green:
 delete-service-version:
 	kubectl patch service chat-service -p '{"spec":{"selector":{"version":null}}}'
 
+canary-0: delete-service-version
+	kubectl scale deployment chat-service-blue --replicas=10
+	kubectl scale deployment chat-service-green --replicas=0
+
 canary-20: delete-service-version
 	kubectl scale deployment chat-service-blue --replicas=8
 	kubectl scale deployment chat-service-green --replicas=2

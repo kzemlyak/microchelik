@@ -22,6 +22,10 @@ switch-to-green:
 delete-service-version:
 	kubectl patch service social-service -p '{"spec":{"selector":{"version":null}}}'
 
+canary-0: delete-service-version
+	kubectl scale deployment social-service-blue --replicas=10
+	kubectl scale deployment social-service-green --replicas=0
+
 canary-20: delete-service-version
 	kubectl scale deployment social-service-blue --replicas=8
 	kubectl scale deployment social-service-green --replicas=2
