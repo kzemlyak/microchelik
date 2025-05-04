@@ -1,0 +1,51 @@
+syntax = "proto3";
+package chat;
+option go_package = "pkg/api/chat";
+
+message CreateChatRequest {
+  string first_user_id = 1;
+  string second_user_id = 2;
+}
+
+message CreateChatResponse {
+  string id = 1;
+}
+
+message DeleteChatRequest {
+  string id = 1;
+}
+
+message DeleteChatResponse {
+  string id = 1;
+}
+
+message GetChatMessagesRequest {
+  string id = 1;
+  optional string cursor = 2;
+  optional int32 limit = 3;
+}
+
+message ChatMessage {
+  string id = 1;
+  string text = 2;
+  string author_id = 3;
+  string chat_id = 4;
+  string created_at = 5;
+}
+
+message GetChatMessagesResponse {
+  repeated ChatMessage messages = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+  int32 total = 4;
+}
+
+message SendMessageRequest {
+  string chat_id = 1;
+  string author_id = 2;
+  string text = 3;
+}
+
+message SendMessageResponse {
+  string id = 1;
+}

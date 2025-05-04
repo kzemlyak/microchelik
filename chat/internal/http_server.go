@@ -1,4 +1,4 @@
-package main
+package http_server
 
 import (
 	"net/http"
@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func main() {
+func InitHttpServer() {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -26,7 +26,7 @@ func main() {
 	})
 
 	e.GET("/hello", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "Hello, user service! <3")
+		return c.HTML(http.StatusOK, "Hello, chat service! <3")
 	})
 
 	httpPort := os.Getenv("PORT")
@@ -38,26 +38,3 @@ func main() {
 
 	e.Logger.Fatal(e.Start(":" + httpPort))
 }
-
-/user/register
-	body: {
-		"email": "test@test.com",
-		"password": "test",
-	}
-/user/login
-	body: {
-		"email": "test@test.com",
-		"password": "test",
-	}
-/user/logout
-
-/token/introspect
-	body: {
-		"token": "test",
-	}
-
-/token/refresh
-	body: {
-		"access_token": "test",
-		"refresh_token": "test",
-	}

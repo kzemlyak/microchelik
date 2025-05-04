@@ -1,3 +1,5 @@
+include protogen.mk
+
 up:
 	docker compose up -d
 

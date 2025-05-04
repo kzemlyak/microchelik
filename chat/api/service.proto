@@ -1,0 +1,11 @@
+syntax = "proto3";
+package chat;
+import "api/messages.proto";
+option go_package = "pkg/api/chat";
+
+service ChatService {
+  rpc CreateChat(CreateChatRequest) returns (CreateChatResponse) {}
+  rpc DeleteChat(DeleteChatRequest) returns (DeleteChatResponse) {}
+  rpc GetChatMessages(GetChatMessagesRequest) returns (GetChatMessagesResponse) {}
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
+}
