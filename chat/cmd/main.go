@@ -1,9 +1,10 @@
 package main
 
 import (
-	http_server "github.com/kzemlyak/microchelik/chat/internal"
+	server "github.com/kzemlyak/microchelik/chat/server"
 )
 
 func main() {
-	http_server.InitHttpServer()
+	server.InitHttpServer()
+	server.InitGrpcServer()
 }
