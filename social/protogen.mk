@@ -5,7 +5,7 @@ LOCAL_BIN := $(CURDIR)/bin
 PROTOC = PATH="$$PATH:$(LOCAL_BIN)" protoc
 
 # Путь до protobuf файлов
-PROTO_PATH := $(CURDIR)/api/chat
+PROTO_PATH := $(CURDIR)/api/social
 
 # Путь до сгенеренных .pb.go файлов
 PKG_PROTO_PATH := $(CURDIR)/pkg
@@ -45,4 +45,4 @@ build:
 	.protoc-generate \
 	.tidy \
 	generate \
-	build
+	build 

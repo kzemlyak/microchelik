@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"net/http"
@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func main() {
+func InitHttpServer() {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -38,26 +38,3 @@ func main() {
 
 	e.Logger.Fatal(e.Start(":" + httpPort))
 }
-
-/user/register
-	body: {
-		"email": "test@test.com",
-		"password": "test",
-	}
-/user/login
-	body: {
-		"email": "test@test.com",
-		"password": "test",
-	}
-/user/logout
-
-/token/introspect
-	body: {
-		"token": "test",
-	}
-
-/token/refresh
-	body: {
-		"access_token": "test",
-		"refresh_token": "test",
-	}

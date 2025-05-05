@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"net/http"
@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func main() {
+func InitHttpServer() {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -38,58 +38,3 @@ func main() {
 
 	e.Logger.Fatal(e.Start(":" + httpPort))
 }
-
-post /social/profiles
-	body: {
-		"user_id": "1",
-		"nickname": "test",
-	}
-
-get /social/profiles/search
-	query: {
-		"nickname": "test",
-	}
-	response: {
-		"profiles": [
-			{
-				"user_id": "1",
-			},
-		],
-	}
-
-post /social/friends/requests
-	body: {
-		"user_id": "1",
-		"friend_id": "2",
-	}
-
-get /social/friends/requests
-	body: {
-		"user_id": "1",
-		"friend_id": "2",
-	}
-
-post /social/friends/requests/accept
-	body: {
-		"user_id": "1",
-		"friend_id": "2",
-	}
-
-post /social/friends/requests/decline
-	body: {
-		"user_id": "1",
-		"friend_id": "2",
-	}
-
-get /social/friends
-	body: {
-		"user_id": "1",
-		"friend_id": "2",
-	}
-
-delete /social/friends
-	body: {
-		"user_id": "1",
-		"friend_id": "2",
-	}
-
