@@ -1,0 +1,82 @@
+syntax = "proto3";
+package social;
+option go_package = "pkg/api/social";
+
+message Profile {
+  string user_id = 1;
+  string nickname = 2;
+}
+
+message CreateProfileRequest {
+  string user_id = 1;
+  string nickname = 2;
+}
+
+message CreateProfileResponse {
+  string user_id = 1;
+}
+
+message SearchProfilesRequest {
+  string nickname = 1;
+}
+
+message SearchProfilesResponse {
+  repeated Profile profiles = 1;
+}
+
+message FriendRequest {
+  string user_id = 1;
+  string friend_id = 2;
+}
+
+message CreateFriendRequestRequest {
+  string user_id = 1;
+  string friend_id = 2;
+}
+
+message CreateFriendRequestResponse {
+  bool success = 1;
+}
+
+message GetFriendRequestsRequest {
+  string user_id = 1;
+}
+
+message GetFriendRequestsResponse {
+  repeated FriendRequest requests = 1;
+}
+
+message AcceptFriendRequestRequest {
+  string user_id = 1;
+  string friend_id = 2;
+}
+
+message AcceptFriendRequestResponse {
+  bool success = 1;
+}
+
+message DeclineFriendRequestRequest {
+  string user_id = 1;
+  string friend_id = 2;
+}
+
+message DeclineFriendRequestResponse {
+  bool success = 1;
+}
+
+message GetFriendsRequest {
+  string user_id = 1;
+}
+
+message GetFriendsResponse {
+  repeated string friend_ids = 1;
+}
+
+message DeleteFriendRequest {
+  string user_id = 1;
+  string friend_id = 2;
+}
+
+message DeleteFriendResponse {
+  bool success = 1;
+}

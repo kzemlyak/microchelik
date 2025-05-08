@@ -1,0 +1,20 @@
+syntax = "proto3";
+package social;
+import "api/social/messages.proto";
+option go_package = "pkg/api/social";
+
+service SocialService {
+  // Profile management
+  rpc CreateProfile(CreateProfileRequest) returns (CreateProfileResponse) {}
+  rpc SearchProfiles(SearchProfilesRequest) returns (SearchProfilesResponse) {}
+
+  // Friend requests
+  rpc CreateFriendRequest(CreateFriendRequestRequest) returns (CreateFriendRequestResponse) {}
+  rpc GetFriendRequests(GetFriendRequestsRequest) returns (GetFriendRequestsResponse) {}
+  rpc AcceptFriendRequest(AcceptFriendRequestRequest) returns (AcceptFriendRequestResponse) {}
+  rpc DeclineFriendRequest(DeclineFriendRequestRequest) returns (DeclineFriendRequestResponse) {}
+
+  // Friends management
+  rpc GetFriends(GetFriendsRequest) returns (GetFriendsResponse) {}
+  rpc DeleteFriend(DeleteFriendRequest) returns (DeleteFriendResponse) {}
+}

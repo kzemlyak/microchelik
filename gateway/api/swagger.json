@@ -1,0 +1,750 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microchelik API",
+    "version": "1.0.0",
+    "description": "API for Microchelik services"
+  },
+  "host": "localhost",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "user",
+      "description": "User authentication and management"
+    },
+    {
+      "name": "social",
+      "description": "Social features and profile management"
+    },
+    {
+      "name": "chat",
+      "description": "Chat functionality"
+    }
+  ],
+  "paths": {
+    "/user/register": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Register a new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful registration",
+            "schema": {
+              "$ref": "#/definitions/RegisterResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Login user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Logout user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogoutRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful logout",
+            "schema": {
+              "$ref": "#/definitions/LogoutResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/token/introspect": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Introspect token",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenIntrospectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token introspection result",
+            "schema": {
+              "$ref": "#/definitions/TokenIntrospectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/token/refresh": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Refresh token",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenRefreshRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token refresh result",
+            "schema": {
+              "$ref": "#/definitions/TokenRefreshResponse"
+            }
+          }
+        }
+      }
+    },
+    "/social/profile": {
+      "post": {
+        "tags": ["social"],
+        "summary": "Create user profile",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProfileRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile created successfully",
+            "schema": {
+              "$ref": "#/definitions/CreateProfileResponse"
+            }
+          }
+        }
+      }
+    },
+    "/social/profiles/search": {
+      "get": {
+        "tags": ["social"],
+        "summary": "Search profiles",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "schema": {
+              "$ref": "#/definitions/SearchProfilesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/social/friend-request": {
+      "post": {
+        "tags": ["social"],
+        "summary": "Create friend request",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateFriendRequestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Friend request created",
+            "schema": {
+              "$ref": "#/definitions/CreateFriendRequestResponse"
+            }
+          }
+        }
+      }
+    },
+    "/social/friend-requests": {
+      "get": {
+        "tags": ["social"],
+        "summary": "Get friend requests",
+        "responses": {
+          "200": {
+            "description": "List of friend requests",
+            "schema": {
+              "$ref": "#/definitions/GetFriendRequestsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/social/friend-request/accept": {
+      "post": {
+        "tags": ["social"],
+        "summary": "Accept friend request",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcceptFriendRequestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Friend request accepted",
+            "schema": {
+              "$ref": "#/definitions/AcceptFriendRequestResponse"
+            }
+          }
+        }
+      }
+    },
+    "/social/friend-request/decline": {
+      "post": {
+        "tags": ["social"],
+        "summary": "Decline friend request",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeclineFriendRequestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Friend request declined",
+            "schema": {
+              "$ref": "#/definitions/DeclineFriendRequestResponse"
+            }
+          }
+        }
+      }
+    },
+    "/social/friends": {
+      "get": {
+        "tags": ["social"],
+        "summary": "Get friends list",
+        "responses": {
+          "200": {
+            "description": "List of friends",
+            "schema": {
+              "$ref": "#/definitions/GetFriendsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/social/friends/{friendId}": {
+      "delete": {
+        "tags": ["social"],
+        "summary": "Delete friend",
+        "parameters": [
+          {
+            "name": "friendId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Friend deleted",
+            "schema": {
+              "$ref": "#/definitions/DeleteFriendResponse"
+            }
+          }
+        }
+      }
+    },
+    "/chat": {
+      "post": {
+        "tags": ["chat"],
+        "summary": "Create chat",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateChatRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chat created",
+            "schema": {
+              "$ref": "#/definitions/CreateChatResponse"
+            }
+          }
+        }
+      }
+    },
+    "/chat/{chatId}": {
+      "delete": {
+        "tags": ["chat"],
+        "summary": "Delete chat",
+        "parameters": [
+          {
+            "name": "chatId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chat deleted",
+            "schema": {
+              "$ref": "#/definitions/DeleteChatResponse"
+            }
+          }
+        }
+      }
+    },
+    "/chat/{chatId}/messages": {
+      "get": {
+        "tags": ["chat"],
+        "summary": "Get chat messages",
+        "parameters": [
+          {
+            "name": "chatId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Cursor for pagination"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "description": "Maximum number of messages to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chat messages",
+            "schema": {
+              "$ref": "#/definitions/GetChatMessagesResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["chat"],
+        "summary": "Send message",
+        "parameters": [
+          {
+            "name": "chatId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Message sent",
+            "schema": {
+              "$ref": "#/definitions/SendMessageResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegisterRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "RegisterResponse": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginResponse": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        }
+      }
+    },
+    "LogoutRequest": {
+      "type": "object",
+      "properties": {
+        "refresh_token": {
+          "type": "string"
+        }
+      }
+    },
+    "LogoutResponse": {
+      "type": "object"
+    },
+    "TokenIntrospectRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenIntrospectResponse": {
+      "type": "object",
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenRefreshRequest": {
+      "type": "object",
+      "properties": {
+        "refresh_token": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenRefreshResponse": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateProfileRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateProfileResponse": {
+      "type": "object",
+      "properties": {
+        "profile_id": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchProfilesResponse": {
+      "type": "object",
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Profile"
+          }
+        }
+      }
+    },
+    "Profile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateFriendRequestRequest": {
+      "type": "object",
+      "properties": {
+        "to_user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateFriendRequestResponse": {
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "type": "string"
+        }
+      }
+    },
+    "GetFriendRequestsResponse": {
+      "type": "object",
+      "properties": {
+        "requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FriendRequest"
+          }
+        }
+      }
+    },
+    "FriendRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "from_user_id": {
+          "type": "string"
+        },
+        "to_user_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "ACCEPTED", "DECLINED"]
+        }
+      }
+    },
+    "AcceptFriendRequestRequest": {
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "type": "string"
+        }
+      }
+    },
+    "AcceptFriendRequestResponse": {
+      "type": "object"
+    },
+    "DeclineFriendRequestRequest": {
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "type": "string"
+        }
+      }
+    },
+    "DeclineFriendRequestResponse": {
+      "type": "object"
+    },
+    "GetFriendsResponse": {
+      "type": "object",
+      "properties": {
+        "friends": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Profile"
+          }
+        }
+      }
+    },
+    "DeleteFriendRequest": {
+      "type": "object",
+      "properties": {
+        "friend_id": {
+          "type": "string"
+        }
+      }
+    },
+    "DeleteFriendResponse": {
+      "type": "object"
+    },
+    "CreateChatRequest": {
+      "type": "object",
+      "properties": {
+        "participant_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreateChatResponse": {
+      "type": "object",
+      "properties": {
+        "chat_id": {
+          "type": "string"
+        }
+      }
+    },
+    "DeleteChatRequest": {
+      "type": "object",
+      "properties": {
+        "chat_id": {
+          "type": "string"
+        }
+      }
+    },
+    "DeleteChatResponse": {
+      "type": "object"
+    },
+    "GetChatMessagesRequest": {
+      "type": "object",
+      "properties": {
+        "chat_id": {
+          "type": "string"
+        }
+      }
+    },
+    "GetChatMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          }
+        },
+        "next_cursor": {
+          "type": "string"
+        },
+        "has_more": {
+          "type": "boolean"
+        },
+        "total": {
+          "type": "integer"
+        }
+      }
+    },
+    "ChatMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "author_id": {
+          "type": "string"
+        },
+        "chat_id": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "SendMessageRequest": {
+      "type": "object",
+      "properties": {
+        "chat_id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "SendMessageResponse": {
+      "type": "object",
+      "properties": {
+        "message_id": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package user;
+import "api/user/messages.proto";
+option go_package = "pkg/api/user";
+
+service UserService {
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc Logout(LogoutRequest) returns (LogoutResponse) {}
+  rpc TokenIntrospect(TokenIntrospectRequest) returns (TokenIntrospectResponse) {}
+  rpc TokenRefresh(TokenRefreshRequest) returns (TokenRefreshResponse) {}
+} 

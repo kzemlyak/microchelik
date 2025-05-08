@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"net/http"
@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func main() {
+func InitHttpServer() {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -26,7 +26,7 @@ func main() {
 	})
 
 	e.GET("/hello", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "Hello, social service! <3")
+		return c.HTML(http.StatusOK, "Hello, user service! <3")
 	})
 
 	httpPort := os.Getenv("PORT")
