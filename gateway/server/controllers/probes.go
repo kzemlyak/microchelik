@@ -1,20 +1,12 @@
-package main
+package controllers
 
 import (
 	"net/http"
-	"os"
-	"time"
 
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 )
 
-func main() {
-	e := echo.New()
-
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
+func InitProbesController(e *echo.Echo) {
 	// for startup probe
 	e.GET("/health", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
@@ -28,13 +20,4 @@ func main() {
 	e.GET("/hello", func(c echo.Context) error {
 		return c.HTML(http.StatusOK, "Hello, gateway service! <3")
 	})
-
-	httpPort := os.Getenv("PORT")
-	if httpPort == "" {
-		httpPort = "8080"
-	}
-
-	time.Sleep(5 * time.Second)
-
-	e.Logger.Fatal(e.Start(":" + httpPort))
 }
