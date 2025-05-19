@@ -5,15 +5,26 @@ option go_package = "pkg/api/social";
 message Profile {
   string user_id = 1;
   string nickname = 2;
+  optional string first_name = 3;
+  optional string last_name = 4;
+  optional string email = 5;
 }
 
 message CreateProfileRequest {
   string user_id = 1;
   string nickname = 2;
+  optional string first_name = 3;
+  optional string last_name = 4;
+  optional string email = 5;
 }
 
 message CreateProfileResponse {
-  string user_id = 1;
+  string id = 1;
+  string user_id = 2;
+  string nickname = 3;
+  optional string first_name = 4;
+  optional string last_name = 5;
+  optional string email = 6;
 }
 
 message SearchProfilesRequest {

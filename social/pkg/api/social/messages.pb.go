@@ -25,6 +25,9 @@ type Profile struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Nickname      string                 `protobuf:"bytes,2,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	FirstName     *string                `protobuf:"bytes,3,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
+	LastName      *string                `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
+	Email         *string                `protobuf:"bytes,5,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -73,10 +76,34 @@ func (x *Profile) GetNickname() string {
 	return ""
 }
 
+func (x *Profile) GetFirstName() string {
+	if x != nil && x.FirstName != nil {
+		return *x.FirstName
+	}
+	return ""
+}
+
+func (x *Profile) GetLastName() string {
+	if x != nil && x.LastName != nil {
+		return *x.LastName
+	}
+	return ""
+}
+
+func (x *Profile) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
 type CreateProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Nickname      string                 `protobuf:"bytes,2,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	FirstName     *string                `protobuf:"bytes,3,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
+	LastName      *string                `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
+	Email         *string                `protobuf:"bytes,5,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -125,9 +152,35 @@ func (x *CreateProfileRequest) GetNickname() string {
 	return ""
 }
 
+func (x *CreateProfileRequest) GetFirstName() string {
+	if x != nil && x.FirstName != nil {
+		return *x.FirstName
+	}
+	return ""
+}
+
+func (x *CreateProfileRequest) GetLastName() string {
+	if x != nil && x.LastName != nil {
+		return *x.LastName
+	}
+	return ""
+}
+
+func (x *CreateProfileRequest) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
+	}
+	return ""
+}
+
 type CreateProfileResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Nickname      string                 `protobuf:"bytes,3,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	FirstName     *string                `protobuf:"bytes,4,opt,name=first_name,json=firstName,proto3,oneof" json:"first_name,omitempty"`
+	LastName      *string                `protobuf:"bytes,5,opt,name=last_name,json=lastName,proto3,oneof" json:"last_name,omitempty"`
+	Email         *string                `protobuf:"bytes,6,opt,name=email,proto3,oneof" json:"email,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -162,9 +215,44 @@ func (*CreateProfileResponse) Descriptor() ([]byte, []int) {
 	return file_api_social_messages_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *CreateProfileResponse) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 func (x *CreateProfileResponse) GetUserId() string {
 	if x != nil {
 		return x.UserId
+	}
+	return ""
+}
+
+func (x *CreateProfileResponse) GetNickname() string {
+	if x != nil {
+		return x.Nickname
+	}
+	return ""
+}
+
+func (x *CreateProfileResponse) GetFirstName() string {
+	if x != nil && x.FirstName != nil {
+		return *x.FirstName
+	}
+	return ""
+}
+
+func (x *CreateProfileResponse) GetLastName() string {
+	if x != nil && x.LastName != nil {
+		return *x.LastName
+	}
+	return ""
+}
+
+func (x *CreateProfileResponse) GetEmail() string {
+	if x != nil && x.Email != nil {
+		return *x.Email
 	}
 	return ""
 }
@@ -873,15 +961,41 @@ var File_api_social_messages_proto protoreflect.FileDescriptor
 
 const file_api_social_messages_proto_rawDesc = "" +
 	"\n" +
-	"\x19api/social/messages.proto\x12\x06social\">\n" +
+	"\x19api/social/messages.proto\x12\x06social\"\xc6\x01\n" +
 	"\aProfile\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bnickname\x18\x02 \x01(\tR\bnickname\"K\n" +
+	"\bnickname\x18\x02 \x01(\tR\bnickname\x12\"\n" +
+	"\n" +
+	"first_name\x18\x03 \x01(\tH\x00R\tfirstName\x88\x01\x01\x12 \n" +
+	"\tlast_name\x18\x04 \x01(\tH\x01R\blastName\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x05 \x01(\tH\x02R\x05email\x88\x01\x01B\r\n" +
+	"\v_first_nameB\f\n" +
+	"\n" +
+	"_last_nameB\b\n" +
+	"\x06_email\"\xd3\x01\n" +
 	"\x14CreateProfileRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\bnickname\x18\x02 \x01(\tR\bnickname\"0\n" +
-	"\x15CreateProfileResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"3\n" +
+	"\bnickname\x18\x02 \x01(\tR\bnickname\x12\"\n" +
+	"\n" +
+	"first_name\x18\x03 \x01(\tH\x00R\tfirstName\x88\x01\x01\x12 \n" +
+	"\tlast_name\x18\x04 \x01(\tH\x01R\blastName\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x05 \x01(\tH\x02R\x05email\x88\x01\x01B\r\n" +
+	"\v_first_nameB\f\n" +
+	"\n" +
+	"_last_nameB\b\n" +
+	"\x06_email\"\xe4\x01\n" +
+	"\x15CreateProfileResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
+	"\bnickname\x18\x03 \x01(\tR\bnickname\x12\"\n" +
+	"\n" +
+	"first_name\x18\x04 \x01(\tH\x00R\tfirstName\x88\x01\x01\x12 \n" +
+	"\tlast_name\x18\x05 \x01(\tH\x01R\blastName\x88\x01\x01\x12\x19\n" +
+	"\x05email\x18\x06 \x01(\tH\x02R\x05email\x88\x01\x01B\r\n" +
+	"\v_first_nameB\f\n" +
+	"\n" +
+	"_last_nameB\b\n" +
+	"\x06_email\"3\n" +
 	"\x15SearchProfilesRequest\x12\x1a\n" +
 	"\bnickname\x18\x01 \x01(\tR\bnickname\"E\n" +
 	"\x16SearchProfilesResponse\x12+\n" +
@@ -967,6 +1081,9 @@ func file_api_social_messages_proto_init() {
 	if File_api_social_messages_proto != nil {
 		return
 	}
+	file_api_social_messages_proto_msgTypes[0].OneofWrappers = []any{}
+	file_api_social_messages_proto_msgTypes[1].OneofWrappers = []any{}
+	file_api_social_messages_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
